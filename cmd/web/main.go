@@ -1,10 +1,12 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"github.com/alexedwards/scs/v2"
 	"github.com/pandadragoon/bookings/internal/config"
 	"github.com/pandadragoon/bookings/internal/handlers"
+	"github.com/pandadragoon/bookings/internal/models"
 	"github.com/pandadragoon/bookings/internal/render"
 	"log"
 	"net/http"
@@ -17,7 +19,7 @@ var app config.AppConfig
 var session *scs.SessionManager
 
 func main() {
-
+	gob.Register(models.Reservation{})
 	app.InProduction = false
 
 	session = scs.New()
