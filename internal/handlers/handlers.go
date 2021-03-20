@@ -3,9 +3,9 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/pandadragoon/bookings/cmd/pkg/config"
-	"github.com/pandadragoon/bookings/cmd/pkg/models"
-	"github.com/pandadragoon/bookings/cmd/pkg/render"
+	"github.com/pandadragoon/bookings/internal/config"
+	"github.com/pandadragoon/bookings/internal/models"
+	"github.com/pandadragoon/bookings/internal/render"
 	"log"
 	"net/http"
 )

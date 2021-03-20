@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"github.com/alexedwards/scs/v2"
-	"github.com/pandadragoon/bookings/cmd/pkg/config"
-	"github.com/pandadragoon/bookings/cmd/pkg/handlers"
-	"github.com/pandadragoon/bookings/cmd/pkg/render"
+	"github.com/pandadragoon/bookings/internal/config"
+	"github.com/pandadragoon/bookings/internal/handlers"
+	"github.com/pandadragoon/bookings/internal/render"
 	"log"
 	"net/http"
 	"time"
