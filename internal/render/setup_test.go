@@ -2,9 +2,11 @@ package render
 
 import (
 	"encoding/gob"
+	"github.com/TwinProduction/go-color"
 	"github.com/alexedwards/scs/v2"
 	"github.com/pandadragoon/bookings/internal/config"
 	"github.com/pandadragoon/bookings/internal/models"
+	"log"
 	"net/http"
 	"os"
 	"testing"
@@ -20,6 +22,12 @@ func TestMain(m *testing.M) {
 
 	// change this to true when in production
 	testApp.InProduction = false
+
+	infoLog := log.New(os.Stdout, color.Cyan+"INFO\t"+color.Reset, log.Ldate|log.Ltime)
+	testApp.InfoLog = infoLog
+
+	errorLog := log.New(os.Stdout, color.Red+"ERROR\t"+color.Reset, log.Ldate|log.Ltime|log.Lshortfile)
+	testApp.ErrorLog = errorLog
 
 	// set up the session
 	session = scs.New()

@@ -3,13 +3,16 @@ package main
 import (
 	"encoding/gob"
 	"fmt"
+	"github.com/TwinProduction/go-color"
 	"github.com/alexedwards/scs/v2"
 	"github.com/pandadragoon/bookings/internal/config"
 	"github.com/pandadragoon/bookings/internal/handlers"
+	"github.com/pandadragoon/bookings/internal/helpers"
 	"github.com/pandadragoon/bookings/internal/models"
 	"github.com/pandadragoon/bookings/internal/render"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -17,6 +20,8 @@ const portNumber = ":4040"
 
 var app config.AppConfig
 var session *scs.SessionManager
+var infoLog *log.Logger
+var errorLog *log.Logger
 
 // main is the main function
 func main() {
@@ -45,6 +50,12 @@ func run() error {
 	// change this to true when in production
 	app.InProduction = false
 
+	infoLog = log.New(os.Stdout, color.Cyan+"INFO\t"+color.Reset, log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog = log.New(os.Stdout, color.Red+"ERROR\t"+color.Reset, log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
+
 	// set up the session
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
@@ -67,5 +78,6 @@ func run() error {
 	handlers.NewHandlers(repo)
 
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 	return nil
 }
